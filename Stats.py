@@ -30,12 +30,18 @@ class Stats:
         self.fn_count = labeled.count(self.FN)
 
     def recall(self):
+        if self.tp_count == 0 and self.fn_count == 0:
+            return 0
         return self.tp_count / (self.tp_count + self.fn_count)
 
     def precision(self):
+        if self.tp_count == 0 and self.fp_count == 0:
+            return 0
         return self.tp_count / (self.tp_count + self.fp_count)
 
     def f_measure(self):
+        if (self.precision() + self.recall()) == 0:
+            return 0
         return (2 * self.precision() * self.recall()) / (self.precision() + self.recall())
 
     def accuracy(self):
